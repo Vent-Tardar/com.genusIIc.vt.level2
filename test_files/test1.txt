@@ -1,0 +1,6 @@
+meat
+fish
+candy
+test
+TEST
+string
