@@ -38,7 +38,7 @@ public class ComparisonDoc {
             for (AbstractDelta<String> delta : patch.getDeltas()) {
                 list.add(delta);
             }
-            
+
             logger.info("File comparison ended.");
         }
         catch (Exception e){
