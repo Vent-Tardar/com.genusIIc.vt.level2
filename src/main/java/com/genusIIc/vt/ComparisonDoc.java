@@ -10,7 +10,7 @@ import com.github.difflib.patch.AbstractDelta;
 import org.apache.logging.log4j.*;
 
 public class ComparisonDoc {
-    private static final Logger logger = LogManager.getLogger(Main.class);
+    private static final Logger logger = LogManager.getLogger(ComparisonDoc.class);
     private void checkingFiles(String org, String mdf) {
         if(!(new File(org).exists() && new File(mdf).exists())) {
             System.out.println();
