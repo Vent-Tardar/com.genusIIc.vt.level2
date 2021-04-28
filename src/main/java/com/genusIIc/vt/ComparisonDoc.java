@@ -25,8 +25,8 @@ public class ComparisonDoc {
     public List compare(String org, String mdf){
         checkingFiles(org, mdf);
         List<AbstractDelta<String>> list = new ArrayList<>();
+        List<String> list_1 = new ArrayList<>();
         try{
-            int i = 1;
             logger.info("File comparison started.");
             logger.info("Files are being compared.");
 
@@ -34,9 +34,17 @@ public class ComparisonDoc {
             List<String> revised = Files.readAllLines(new File(String.valueOf(mdf)).toPath());
 
             Patch<String> patch = DiffUtils.diff(original, revised);
+            String str = null;
 
             for (AbstractDelta<String> delta : patch.getDeltas()) {
                 list.add(delta);
+                str = String.join(" ", list.toString());
+                str = str.replace("[ChangeDelta, ", "").
+                        replace("[position", "line").
+                        replace("lines", "changed").
+                        replace("]]", "");
+                list.remove(delta);
+                list_1.add(str);
             }
 
             logger.info("File comparison ended.");
@@ -44,6 +52,6 @@ public class ComparisonDoc {
         catch (Exception e){
             System.err.println(e.getMessage());
         }
-        return list;
+        return list_1;
     }
 }

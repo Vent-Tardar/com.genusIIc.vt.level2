@@ -61,7 +61,7 @@ public class ComparisonDocTest {
         ComparisonDoc cd = new ComparisonDoc();
         List lst = new ArrayList();
         lst = cd.compare(absolutePath_1, absolutePath_2);
-        assertEquals(8, lst.size());
+        assertEquals(5, lst.size());
     }
 
     @Test
