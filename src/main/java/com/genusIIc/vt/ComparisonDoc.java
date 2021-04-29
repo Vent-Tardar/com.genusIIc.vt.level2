@@ -15,17 +15,17 @@ public class ComparisonDoc {
         if(!(new File(org).exists() && new File(mdf).exists())) {
             System.out.println();
             logger.error("A non-existent file is entered in the parameters");
-            throw new NullPointerException("A non-existent file is entered in the parameters");
+            throw new FileException("A non-existent file is entered in the parameters");
         }
         if (org.equals(mdf)) {
             System.out.println();
             logger.error("The same file was entered in the parameters");
-            throw new IOException("The same file was entered in the parameters");
+            throw new FileException("The same file was entered in the parameters");
         }
         if(new File(org).length() == 0 || new File(mdf).length() == 0) {
             System.out.println();
             logger.error("Files are empty");
-            throw new NullPointerException("Files are empty");
+            throw new FileException("Files are empty");
         }
     }
 
@@ -66,8 +66,8 @@ public class ComparisonDoc {
             }
 
             logger.info("File comparison ended.");
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (FileException e){
+            System.out.println("Error: " + e.getCause());
         }
         catch (Exception e){
             System.err.println(e.getMessage());
