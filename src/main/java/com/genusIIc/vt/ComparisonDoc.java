@@ -34,11 +34,10 @@ public class ComparisonDoc {
             List<String> revised = Files.readAllLines(new File(String.valueOf(mdf)).toPath());
 
             Patch<String> patch = DiffUtils.diff(original, revised);
-            String str = null;
 
             for (AbstractDelta<String> delta : patch.getDeltas()) {
                 list.add(delta);
-                str = String.join(" ", list.toString());
+                String str = String.join(" ", list.toString());
                 str = str.replace("[ChangeDelta, ", "").
                         replace("[position", "line").
                         replace("lines", "changed").
