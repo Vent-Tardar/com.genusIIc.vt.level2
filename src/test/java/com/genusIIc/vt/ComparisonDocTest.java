@@ -36,20 +36,14 @@ public class ComparisonDocTest {
 //    }
 
     @Test
-    public void filecomparisonTest() {
-//        File test_file_1 = new File(classLoader.getResource("test1.txt").getFile());
-//        String absolutePath_1 = test_file_1.getAbsolutePath();
-//        File test_file_2 = new File(classLoader.getResource("test1.txt").getFile());
-//        String absolutePath_2 = test_file_2.getAbsolutePath();
-//        try{
-//            if (!(absolutePath_1.equals(absolutePath_2))){
-//                fail("Expected IOException");
-//            }
-//        }catch (Exception e) {
-//            assertNotEquals("", e.getMessage());
-//        }
-
+    public void identicallyTest() {
         List<String> lst = cd.compare(getFilePath("smallTest_1.txt"), getFilePath("smallTest_1.txt"));
+        assertEquals(0, lst.size());
+    }
+
+    @Test
+    public void emptiesTest(){
+        List<String> lst = cd.compare(getFilePath("NullFile1.txt"), getFilePath("NullFile2.txt"));
         assertEquals(0, lst.size());
     }
 

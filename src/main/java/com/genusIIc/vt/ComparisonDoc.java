@@ -38,10 +38,20 @@ public class ComparisonDoc {
             for (AbstractDelta<String> delta : patch.getDeltas()) {
                 list.add(delta);
                 String str = String.join(" ", list.toString());
-                str = str.replace("[ChangeDelta, ", "").
-                        replace("[position", "line").
-                        replace("lines", "changed").
-                        replace("]]", "");
+                if (str.indexOf("ChangeDelta") != -1){
+                    str = str.replace("[[ChangeDelta, ", "Changes: ").
+                            replace("position", "line").
+                            replace("lines", "changed").
+                            replace("]]", "");
+                } else if (str.indexOf("DeleteDelta") != -1){
+                    str = str.replace("[[DeleteDelta, ", "Delete: ").
+                            replace("lines", "deleted").
+                            replace("]]", "");
+                } else if (str.indexOf("InsertDelta") != -1){
+                    str = str.replace("[[InsertDelta, ", "Insert: ").
+                            replace("lines", "inserted").
+                            replace("]]", "");
+                }
                 list.remove(delta);
                 list_1.add(str);
             }
