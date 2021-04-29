@@ -22,7 +22,7 @@ public class ComparisonDoc {
         }
     }
 
-    public List compare(String org, String mdf){
+    public List<String> compare(String org, String mdf){
         checkingFiles(org, mdf);
         List<AbstractDelta<String>> list = new ArrayList<>();
         List<String> list_1 = new ArrayList<>();
