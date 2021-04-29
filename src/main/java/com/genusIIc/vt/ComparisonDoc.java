@@ -11,18 +11,25 @@ import org.apache.logging.log4j.*;
 
 public class ComparisonDoc {
     private static final Logger logger = LogManager.getLogger(ComparisonDoc.class);
-    private void checkingFiles(String org, String mdf) {
+    private void checkingFiles(String org, String mdf) throws IOException {
         if(!(new File(org).exists() && new File(mdf).exists())) {
             System.out.println();
             logger.error("A non-existent file is entered in the parameters");
+            throw new NullPointerException("A non-existent file is entered in the parameters");
         }
         if (org.equals(mdf)) {
             System.out.println();
             logger.error("The same file was entered in the parameters");
+            throw new IOException("The same file was entered in the parameters");
+        }
+        if(new File(org).length() == 0 || new File(mdf).length() == 0) {
+            System.out.println();
+            logger.error("Files are empty");
+            throw new NullPointerException("Files are empty");
         }
     }
 
-    public List<String> compare(String org, String mdf){
+    public List<String> compare(String org, String mdf) throws IOException {
         checkingFiles(org, mdf);
         List<AbstractDelta<String>> list = new ArrayList<>();
         List<String> list_1 = new ArrayList<>();
@@ -45,10 +52,12 @@ public class ComparisonDoc {
                             replace("]]", "");
                 } else if (str.indexOf("DeleteDelta") != -1){
                     str = str.replace("[[DeleteDelta, ", "Delete: ").
+                            replace("position", "line").
                             replace("lines", "deleted").
                             replace("]]", "");
                 } else if (str.indexOf("InsertDelta") != -1){
                     str = str.replace("[[InsertDelta, ", "Insert: ").
+                            replace("position", "line").
                             replace("lines", "inserted").
                             replace("]]", "");
                 }
@@ -57,6 +66,8 @@ public class ComparisonDoc {
             }
 
             logger.info("File comparison ended.");
+        }catch (IOException e){
+            System.out.println(e.getMessage());
         }
         catch (Exception e){
             System.err.println(e.getMessage());
