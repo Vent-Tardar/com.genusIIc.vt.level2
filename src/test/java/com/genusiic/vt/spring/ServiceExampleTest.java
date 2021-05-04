@@ -25,14 +25,12 @@ public class ServiceExampleTest {
         return new File(Objects.requireNonNull(classLoader.getResource(filename)).getFile()).getAbsolutePath();
     }
 
-    //Checking the existence of the file
     @Test
     public void pathTest() throws NullPointerException{
         Throwable thrown = assertThrows(NullPointerException.class, () -> getFilePath("test3.txt"));
         assertNull(thrown.getMessage());
     }
 
-    //Checking for the same files
     @Test
     public void identicallyTest() {
         Throwable thrown = assertThrows(IOException.class, () -> {
@@ -41,7 +39,6 @@ public class ServiceExampleTest {
         assertNotNull(thrown.getMessage());
     }
 
-    //Checking for empty files
     @Test
     public void emptiesTest() throws NullPointerException {
         Throwable thrown = assertThrows(NullPointerException.class, () -> {
@@ -49,7 +46,6 @@ public class ServiceExampleTest {
         });
     }
 
-    //Checking the comparison on small files
     @Test
     @Timeout(4)
     public void compareSmallTest() throws IOException {
@@ -59,7 +55,6 @@ public class ServiceExampleTest {
         lst.get(1).equals("Float");
     }
 
-    //Checking the comparison on medium files
     @Test
     @Timeout(6)
     public void compareMediumTest() throws IOException {
@@ -72,7 +67,6 @@ public class ServiceExampleTest {
         lst.get(4).equals("To_be_snout");
     }
 
-    //Checking the comparison on big files
     @Test
     @Timeout(20)
     public void compareBigTest() throws IOException {
@@ -84,7 +78,6 @@ public class ServiceExampleTest {
         lst.get(3).equals("I'm running out... It's scary to recount...");
     }
 
-    //Checking for the number of rows(deleting)
     @Test
     public void deleteTest() throws IOException{
         List<String> lst = cd.compare(getFilePath("testing2.txt"), getFilePath("testing1.txt"));
@@ -95,7 +88,6 @@ public class ServiceExampleTest {
         }
     }
 
-    //Checking for the number of rows(change)
     @Test
     public void insertTest() throws IOException{
         List<String> lst = cd.compare(getFilePath("testing1.txt"), getFilePath("testing2.txt"));
