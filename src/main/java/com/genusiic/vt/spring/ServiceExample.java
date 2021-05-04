@@ -23,7 +23,7 @@ public class ServiceExample {
     private void checkingFiles(String org, String mdf) throws IOException {
         if(!(new File(org).exists() && new File(mdf).exists())) {
             System.out.println();
-            logger.error("A non-existent file is entered in the parameters");
+            logger.error("A non-existent file is entered in the parameters.");
             throw new FileException("A non-existent file is entered in the parameters");
         }
         if (org.equals(mdf)) {

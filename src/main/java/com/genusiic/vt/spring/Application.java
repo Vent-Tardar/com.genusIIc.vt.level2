@@ -21,7 +21,7 @@ public class Application implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
         if (args.length != 2){
-            logger.error("Parameters entered incorrectly");
+            logger.error("Parameters entered incorrectly!");
         } else {
             ServiceExample serEx = new ServiceExample();
             List<String> lst = serEx.compare(args[0], args[1]);
