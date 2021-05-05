@@ -8,5 +8,12 @@
     <button type="submit">Submit</button>
 </form>
 
+<h2>Compare Files:</h2>
+<ul>
+    <li th:each="element : ${compare}">
+        <span th:utext="${element}"></span>
+    </li>
+</ul>
+
 </body>
 </html>
