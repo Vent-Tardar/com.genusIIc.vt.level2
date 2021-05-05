@@ -89,11 +89,11 @@ public class FileController {
     }
 
     @PostMapping("/compare")
-    public String compare(String org, String mdf) throws IOException {
+    public String compare(Model model) throws IOException {
         List<AbstractDelta<String>> list = new ArrayList<>();
         try{
-            List<String> original = Files.readAllLines(new File(String.valueOf(org)).toPath());
-            List<String> revised = Files.readAllLines(new File(String.valueOf(mdf)).toPath());
+            List<String> original = Files.readAllLines(new File(org).toPath());
+            List<String> revised = Files.readAllLines(new File(mdf).toPath());
 
             Patch<String> patch = DiffUtils.diff(original, revised);
 
@@ -122,7 +122,6 @@ public class FileController {
         }catch (IOException e){
             System.out.println("Error: " + e.getCause());
         }
-        Model model = null;
         model.addAttribute("compare", list_1);
         return "listFiles";
     }
