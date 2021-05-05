@@ -28,8 +28,8 @@ public class FileController {
     private final List<String> list_1 = new ArrayList<>();
 
     private final StorageService storageService;
-    private String org;
-    private String mdf;
+    private String org = "C:\\Users\\Genus\\Documents\\uploadFiles\\";
+    private String mdf = "C:\\Users\\Genus\\Documents\\uploadFiles\\";
 
     public FileController(StorageService storageService) {
         this.storageService = storageService;
@@ -93,8 +93,8 @@ public class FileController {
     @PostMapping("/compare")
     public String compare(Model model) throws IOException {
         List<AbstractDelta<String>> list = new ArrayList<>();
-        mdf = listFile.get(listFile.size()-1);
-        org = listFile.get(listFile.size()-2);
+        mdf = mdf + listFile.get(listFile.size()-1);
+        org = org + listFile.get(listFile.size()-2);
         try{
             List<String> original = Files.readAllLines(new File(org).toPath());
             List<String> revised = Files.readAllLines(new File(mdf).toPath());
