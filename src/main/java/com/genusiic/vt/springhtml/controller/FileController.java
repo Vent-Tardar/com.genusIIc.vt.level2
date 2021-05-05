@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class FileController {
-    //@Value("${list_1:unknown}")
+    private final List<String> listFile = new ArrayList<>();
     private final List<String> list_1 = new ArrayList<>();
 
     private final StorageService storageService;
@@ -65,6 +65,8 @@ public class FileController {
     public FileResponse uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         String name = storageService.store(file);
 
+        listFile.add(name);
+
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
                 .path(name)
@@ -91,6 +93,8 @@ public class FileController {
     @PostMapping("/compare")
     public String compare(Model model) throws IOException {
         List<AbstractDelta<String>> list = new ArrayList<>();
+        mdf = listFile.get(listFile.size()-1);
+        org = listFile.get(listFile.size()-2);
         try{
             List<String> original = Files.readAllLines(new File(org).toPath());
             List<String> revised = Files.readAllLines(new File(mdf).toPath());
