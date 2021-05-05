@@ -1,5 +1,4 @@
-package com.genusiic.vt.springhtml.controllers;
-
+package com.genusiic.vt.springhtml.controller;
 
 import com.genusiic.vt.springhtml.commons.FileResponse;
 import com.genusiic.vt.springhtml.storage.StorageService;
@@ -18,7 +17,8 @@ import java.util.stream.Collectors;
 
 @Controller
 public class FileController {
-    private StorageService storageService;
+
+    private final StorageService storageService;
 
     public FileController(StorageService storageService) {
         this.storageService = storageService;
@@ -64,9 +64,9 @@ public class FileController {
 
     @PostMapping("/upload-multiple-files")
     @ResponseBody
-    public List<FileResponse> uploadMultipleFiles(@RequestParam("file") MultipartFile[] files) {
+    public List<FileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
         return Arrays.stream(files)
-                .map(file -> uploadFile(file))
+                .map(this::uploadFile)
                 .collect(Collectors.toList());
     }
 }

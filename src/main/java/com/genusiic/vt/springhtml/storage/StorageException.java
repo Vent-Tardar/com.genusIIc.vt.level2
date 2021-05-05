@@ -1,10 +1,12 @@
 package com.genusiic.vt.springhtml.storage;
 
-public class StorageException extends RuntimeException{
-    public StorageException(String message){
+public class StorageException extends RuntimeException {
+
+    public StorageException(String message) {
         super(message);
     }
-    public StorageException(String message, Throwable cause){
+
+    public StorageException(String message, Throwable cause) {
         super(message, cause);
     }
 }

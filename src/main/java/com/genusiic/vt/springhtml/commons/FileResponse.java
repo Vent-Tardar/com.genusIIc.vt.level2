@@ -6,7 +6,7 @@ public class FileResponse {
     private String type;
     private long size;
 
-    public FileResponse(String name, String uri, String type, long size){
+    public FileResponse(String name, String uri, String type, long size) {
         this.name = name;
         this.uri = uri;
         this.type = type;
@@ -46,10 +46,12 @@ public class FileResponse {
     }
 
     @Override
-    public String toString(){
-        return "FileResponse{"+"name='"+name+'\''
-                +", uri='"+uri+'\''
-                +", type='"+type+'\''
-                +", size='"+size+'}';
+    public String toString() {
+        return "FileResponse{" +
+                "name='" + name + '\'' +
+                ", uri='" + uri + '\'' +
+                ", type='" + type + '\'' +
+                ", size=" + size +
+                '}';
     }
 }

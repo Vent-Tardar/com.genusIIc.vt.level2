@@ -12,5 +12,4 @@ public class SpringHtmlApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringHtmlApplication.class, args);
     }
-
 }
