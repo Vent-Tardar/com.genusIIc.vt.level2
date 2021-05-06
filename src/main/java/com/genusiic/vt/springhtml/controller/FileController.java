@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -28,8 +29,6 @@ public class FileController {
     private final List<String> list_1 = new ArrayList<>();
 
     private final StorageService storageService;
-    private String org = "C:\\Users\\Genus\\Documents\\uploadFiles\\";
-    private String mdf = "C:\\Users\\Genus\\Documents\\uploadFiles\\";
 
     public FileController(StorageService storageService) {
         this.storageService = storageService;
@@ -90,14 +89,26 @@ public class FileController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/compare")
+    @GetMapping("/compare")
     public String compare(Model model) throws IOException {
         List<AbstractDelta<String>> list = new ArrayList<>();
-        mdf = mdf + listFile.get(listFile.size()-1);
-        org = org + listFile.get(listFile.size()-2);
         try{
-            List<String> original = Files.readAllLines(new File(org).toPath());
-            List<String> revised = Files.readAllLines(new File(mdf).toPath());
+            StringBuilder org = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
+            StringBuilder mdf = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
+            File folder = new File("C:/Users/Genus/Documents/uploadFiles");
+            for (File file : Objects.requireNonNull(folder.listFiles()))
+            {
+                if (file.getName().contains("1")){
+                    org.append(file.getName());
+                }
+                if (file.getName().contains("2")){
+                    mdf.append(file.getName());
+                }
+            }
+
+            List<String> original = Files.readAllLines(new File(org.toString()).toPath());
+            //String mdf = "C:\\Users\\Genus\\Documents\\uploadFiles\\";
+            List<String> revised = Files.readAllLines(new File(mdf.toString()).toPath());
 
             Patch<String> patch = DiffUtils.diff(original, revised);
 
@@ -127,6 +138,6 @@ public class FileController {
             System.out.println("Error: " + e.getCause());
         }
         model.addAttribute("compare", list_1);
-        return "listFiles";
+        return "compareFiles";
     }
 }

@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<h4>Compare Files</h4>
+<form method="GET" enctype="multipart/form-data" th:action="@{/compare}">
+    <ul>
+        <li th:each="element : ${compare}">
+            <span th:utext="${element}"></span>
+        </li>
+    </ul>
+</form>
+</body>
+</html>
