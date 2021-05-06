@@ -33,17 +33,15 @@ public class ServiceExampleTest {
 
     @Test
     public void identicallyTest() {
-        Throwable thrown = assertThrows(IOException.class, () -> {
-            List<String> lst = cd.compare(getFilePath("smallTest_1.txt"), getFilePath("smallTest_1.txt"));
+        assertThrows(IOException.class, () -> {
+           cd.compare("smallTest_1.txt", "smallTest_1.txt");
         });
-        assertNotNull(thrown.getMessage());
     }
 
     @Test
-    public void emptiesTest() throws NullPointerException {
-        Throwable thrown = assertThrows(NullPointerException.class, () -> {
-            List<String> lst = cd.compare(getFilePath("NullFile1.txt"), getFilePath("NullFile2.txt"));
-        });
+    public void emptiesTest() throws IOException {
+        List<String> lst = cd.compare(getFilePath("NullFile1.txt"), getFilePath("NullFile2.txt"));
+        assertEquals(0, lst.size());
     }
 
     @Test
@@ -83,7 +81,7 @@ public class ServiceExampleTest {
         List<String> lst = cd.compare(getFilePath("testing2.txt"), getFilePath("testing1.txt"));
         for (String s : lst) {
             if (s.equals("Delete")) {
-                System.out.println("Success");
+                lst.get(0).equals("zzz");
             }
         }
     }
@@ -93,7 +91,7 @@ public class ServiceExampleTest {
         List<String> lst = cd.compare(getFilePath("testing1.txt"), getFilePath("testing2.txt"));
         for (String s : lst) {
             if (s.equals("Insert")) {
-                System.out.println("Success");
+                lst.get(0).equals("zzz");
             }
         }
     }

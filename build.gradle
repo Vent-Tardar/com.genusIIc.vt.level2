@@ -13,12 +13,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
     implementation group: 'io.github.java-diff-utils', name: 'java-diff-utils', version: '4.9'
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
@@ -43,11 +40,6 @@ task dist {
         copy {
             from('build/libs')
             into('build/dist')
-            include '*.jar'
-        }
-        copy {
-            from(sourceSets.main.runtimeClasspath)
-            into('build/dist/lib')
             include '*.jar'
         }
     }

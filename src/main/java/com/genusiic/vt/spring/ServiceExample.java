@@ -31,11 +31,6 @@ public class ServiceExample {
             logger.error("The same file was entered in the parameters");
             throw new FileException("The same file was entered in the parameters");
         }
-        if(new File(org).length() == 0 || new File(mdf).length() == 0) {
-            System.out.println();
-            logger.error("Files are empty");
-            throw new FileException("Files are empty");
-        }
     }
 
     public List<String> compare(String org, String mdf) throws IOException {
