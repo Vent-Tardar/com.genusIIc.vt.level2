@@ -49,8 +49,8 @@ public class ServiceExampleTest {
     public void compareSmallTest() throws IOException {
         List<String> lst = cd.compare(getFilePath("smallTest_1.txt"), getFilePath("smallTest_2.txt"));
         assertEquals(2, lst.size());
-        lst.get(0).equals("Tap");
-        lst.get(1).equals("Float");
+        assertEquals(lst.get(0), "Changes: line: 1, changed: [Taps] to [Tap]");
+        assertEquals(lst.get(1), "Changes: line: 4, changed: [Floating] to [Float]");
     }
 
     @Test
@@ -58,11 +58,9 @@ public class ServiceExampleTest {
     public void compareMediumTest() throws IOException {
         List<String> lst = cd.compare(getFilePath("test1.txt"), getFilePath("test2.txt"));
         assertEquals(5, lst.size());
-        lst.get(0).equals("Tap");
-        lst.get(1).equals("Kukish");
-        lst.get(2).equals("fugue");
-        lst.get(3).equals("Jiu-jitsu");
-        lst.get(4).equals("To_be_snout");
+        assertEquals(lst.get(0), "Changes: line: 1, changed: [Taps, Kush] to [Tap, Kukish]");
+        assertEquals(lst.get(1), "Changes: line: 6, changed: [Fugue] to [fugue]");
+        assertEquals(lst.get(2), "Changes: line: 10, changed: [Jiu-jujitsu, To be snout, Canadians] to [Jiu-jitsu, To_be_snout, Cabardians]");
     }
 
     @Test
@@ -70,29 +68,21 @@ public class ServiceExampleTest {
     public void compareBigTest() throws IOException {
         List<String> lst = cd.compare(getFilePath("SuperFile1.txt"), getFilePath("SuperFile2.txt"));
         assertEquals(4, lst.size());
-        lst.get(0).equals("It's contempt to punish me...");
-        lst.get(1).equals("When I had hope");
-        lst.get(2).equals("I beg your defense!");
-        lst.get(3).equals("I'm running out... It's scary to recount...");
+        assertEquals(lst.get(0), "Changes: line: 3, changed: [It's contempt to punish me.] to [It's contempt to punish me...]");
+        assertEquals(lst.get(1), "Changes: line: 10, changed: [When I Had Hope] to [When I had hope]");
+        assertEquals(lst.get(2), "Changes: line: 69, changed: [I beg your defense...] to [I beg your defense!]");
+        assertEquals(lst.get(3), "Changes: line: 79, changed: [I'm running out! It's scary to recount...] to [I'm running out... It's scary to recount...]");
     }
 
     @Test
     public void deleteTest() throws IOException{
         List<String> lst = cd.compare(getFilePath("testing2.txt"), getFilePath("testing1.txt"));
-        for (String s : lst) {
-            if (s.equals("Delete")) {
-                lst.get(0).equals("zzz");
-            }
-        }
+        assertEquals(lst.get(1), "Delete: line: 3, deleted: [zzz]");
     }
 
     @Test
     public void insertTest() throws IOException{
         List<String> lst = cd.compare(getFilePath("testing1.txt"), getFilePath("testing2.txt"));
-        for (String s : lst) {
-            if (s.equals("Insert")) {
-                lst.get(0).equals("zzz");
-            }
-        }
+        assertEquals(lst.get(1), "Insert: line: 3, inserted: [zzz]");
     }
 }
