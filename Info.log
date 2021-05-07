@@ -1,0 +1,16 @@
+2021-04-29 15:36:40.998 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison started.
+2021-04-29 15:36:41.004 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - Files are being compared.
+2021-04-29 15:36:41.016 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison ended.
+2021-04-29 15:36:41.044 [Test worker] ERROR com.genusIIc.vt.ComparisonDoc - The same file was entered in the parameters
+2021-04-29 15:36:41.055 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison started.
+2021-04-29 15:36:41.055 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - Files are being compared.
+2021-04-29 15:36:41.058 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison ended.
+2021-04-29 15:36:41.062 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison started.
+2021-04-29 15:36:41.062 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - Files are being compared.
+2021-04-29 15:36:41.064 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison ended.
+2021-04-29 15:36:41.071 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison started.
+2021-04-29 15:36:41.072 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - Files are being compared.
+2021-04-29 15:36:41.075 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison ended.
+2021-04-29 15:36:41.080 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison started.
+2021-04-29 15:36:41.081 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - Files are being compared.
+2021-04-29 15:36:41.082 [Test worker] INFO  com.genusIIc.vt.ComparisonDoc - File comparison ended.
