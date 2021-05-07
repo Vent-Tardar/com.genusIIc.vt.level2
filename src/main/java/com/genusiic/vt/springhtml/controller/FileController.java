@@ -5,6 +5,8 @@ import com.genusiic.vt.springhtml.storage.StorageService;
 import com.github.difflib.DiffUtils;
 import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class FileController {
-    private final List<String> listFile = new ArrayList<>();
+    private static final Logger logger = LogManager.getLogger(FileController.class);
     private final List<String> list_1 = new ArrayList<>();
 
     private final StorageService storageService;
@@ -64,8 +66,6 @@ public class FileController {
     public FileResponse uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         String name = storageService.store(file);
 
-        listFile.add(name);
-
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
                 .path(name)
@@ -90,7 +90,7 @@ public class FileController {
     }
 
     @GetMapping("/compare")
-    public String compare(Model model) throws IOException {
+    public String compare(Model model) {
         List<AbstractDelta<String>> list = new ArrayList<>();
         try{
             StringBuilder org = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
@@ -105,9 +105,10 @@ public class FileController {
                     mdf.append(file.getName());
                 }
             }
+            logger.info("File comparison started.");
+            logger.info("Files are being compared.");
 
             List<String> original = Files.readAllLines(new File(org.toString()).toPath());
-            //String mdf = "C:\\Users\\Genus\\Documents\\uploadFiles\\";
             List<String> revised = Files.readAllLines(new File(mdf.toString()).toPath());
 
             Patch<String> patch = DiffUtils.diff(original, revised);
@@ -134,6 +135,7 @@ public class FileController {
                 list.remove(delta);
                 list_1.add(str);
             }
+            logger.info("File comparison ended.");
         }catch (IOException e){
             System.out.println("Error: " + e.getCause());
         }
