@@ -98,6 +98,7 @@ public class FileController {
             StringBuilder mdf = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
             File folder = new File("C:/Users/Genus/Documents/uploadFiles");
             String[] files = folder.list();
+            assert files != null;
             if (files.length == 0){
                 list_1.add("No files to compare");
             } else if (files.length > 2){

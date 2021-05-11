@@ -10,3 +10,7 @@ This program compares the original file with the modified one. In order for the 
 - Open http://localhost:8080 in the browser; 
 - Upload two files;
 - Press the button *Compare Files*
+
+##Important: 
+
+For the program to work correctly, create a folder named "uploadFiles" in the documents
