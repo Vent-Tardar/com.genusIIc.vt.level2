@@ -1,0 +1,21 @@
+.compare a {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 0.5em 1em;
+    position: relative;
+    text-decoration: none;
+}
+
+.compare a:hover {
+    background-color: rebeccapurple;
+    cursor: pointer;
+}
+
+.upload {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 0.5em 1em;
+    position: relative;
+    text-decoration: none;
+    border: none;
+}

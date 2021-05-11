@@ -92,48 +92,55 @@ public class FileController {
     @GetMapping("/compare")
     public String compare(Model model) {
         List<AbstractDelta<String>> list = new ArrayList<>();
+        list_1.clear();
         try{
             StringBuilder org = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
             StringBuilder mdf = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
             File folder = new File("C:/Users/Genus/Documents/uploadFiles");
-            for (File file : Objects.requireNonNull(folder.listFiles()))
-            {
-                if (file.getName().contains("1")){
-                    org.append(file.getName());
+            String[] files = folder.list();
+            if (files.length == 0){
+                list_1.add("No files to compare");
+            } else if (files.length > 2){
+                list_1.add("More than two files uploaded");
+            } else {
+                for (File file : Objects.requireNonNull(folder.listFiles())) {
+                    if (file.getName().contains("1")) {
+                        org.append(file.getName());
+                    }
+                    if (file.getName().contains("2")) {
+                        mdf.append(file.getName());
+                    }
                 }
-                if (file.getName().contains("2")){
-                    mdf.append(file.getName());
+                logger.info("File comparison started.");
+                logger.info("Files are being compared.");
+
+                List<String> original = Files.readAllLines(new File(org.toString()).toPath());
+                List<String> revised = Files.readAllLines(new File(mdf.toString()).toPath());
+
+                Patch<String> patch = DiffUtils.diff(original, revised);
+
+                for (AbstractDelta<String> delta : patch.getDeltas()) {
+                    list.add(delta);
+                    String str = String.join(" ", list.toString());
+                    if (str.contains("ChangeDelta")) {
+                        str = str.replace("[[ChangeDelta, ", "Changes: ").
+                                replace("position", "line").
+                                replace("lines", "changed").
+                                replace("]]", "");
+                    } else if (str.contains("DeleteDelta")) {
+                        str = str.replace("[[DeleteDelta, ", "Delete: ").
+                                replace("position", "line").
+                                replace("lines", "deleted").
+                                replace("]]", "");
+                    } else if (str.contains("InsertDelta")) {
+                        str = str.replace("[[InsertDelta, ", "Insert: ").
+                                replace("position", "line").
+                                replace("lines", "inserted").
+                                replace("]]", "");
+                    }
+                    list.remove(delta);
+                    list_1.add(str);
                 }
-            }
-            logger.info("File comparison started.");
-            logger.info("Files are being compared.");
-
-            List<String> original = Files.readAllLines(new File(org.toString()).toPath());
-            List<String> revised = Files.readAllLines(new File(mdf.toString()).toPath());
-
-            Patch<String> patch = DiffUtils.diff(original, revised);
-
-            for (AbstractDelta<String> delta : patch.getDeltas()) {
-                list.add(delta);
-                String str = String.join(" ", list.toString());
-                if (str.contains("ChangeDelta")){
-                    str = str.replace("[[ChangeDelta, ", "Changes: ").
-                            replace("position", "line").
-                            replace("lines", "changed").
-                            replace("]]", "");
-                } else if (str.contains("DeleteDelta")){
-                    str = str.replace("[[DeleteDelta, ", "Delete: ").
-                            replace("position", "line").
-                            replace("lines", "deleted").
-                            replace("]]", "");
-                } else if (str.contains("InsertDelta")){
-                    str = str.replace("[[InsertDelta, ", "Insert: ").
-                            replace("position", "line").
-                            replace("lines", "inserted").
-                            replace("]]", "");
-                }
-                list.remove(delta);
-                list_1.add(str);
             }
             logger.info("File comparison ended.");
         }catch (IOException e){

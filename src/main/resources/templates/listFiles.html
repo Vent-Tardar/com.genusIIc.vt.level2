@@ -1,13 +1,18 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Upload Files</title>
+<link rel="stylesheet" href="../static/style.css" type="text/css"/>
+</head>
 <body>
-
 <h4>Upload Multiple Files:</h4>
 <form method="POST" enctype="multipart/form-data" th:action="@{/upload-multiple-files}">
     <input type="file" name="files" multiple> <br/><br/>
-    <button type="submit">Submit</button>
+    <button type="submit" class="upload">Submit</button>
 </form>
 <br>
-<button type="submit"><a href="http://localhost:8080/compare">Compare Files</a></button>
+<p class="compare">
+    <a href="http://localhost:8080/compare">Compare Files</a>
+</p>
 </body>
 </html>
