@@ -99,8 +99,8 @@ public class FileController {
             File folder = new File("C:/Users/Genus/Documents/uploadFiles");
             String[] files = folder.list();
             assert files != null;
-            if (files.length == 0){
-                list_1.add("No files to compare");
+            if (files.length < 2){
+                list_1.add("Not enough files to compare");
             } else if (files.length > 2){
                 list_1.add("More than two files uploaded");
             } else {
