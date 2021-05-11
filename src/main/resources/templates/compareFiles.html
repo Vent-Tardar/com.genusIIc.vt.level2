@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Compare Files</title>
+</head>
 <body>
+<style>
+    li{
+        list-style-type: none;
+    }
+</style>
 <h4>Compare Files</h4>
 <form method="GET" th:action="@{/compare}" name="compareFiles">
     <ul th:name="elements">
