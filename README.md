@@ -11,6 +11,6 @@ This program compares the original file with the modified one. In order for the 
 - Upload two files;
 - Press the button *Compare Files*
 
-##Important: 
+## Important: 
 
 For the program to work correctly, create a folder named "uploadFiles" in the documents
