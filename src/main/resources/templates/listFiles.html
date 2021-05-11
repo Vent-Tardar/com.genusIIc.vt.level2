@@ -2,12 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Upload Files</title>
-<link rel="stylesheet" href="../static/style.css" type="text/css"/>
+<!--<link rel="stylesheet" href="../static/style.css" th:href="@{/css/style.css}" type="text/css"/>-->
 </head>
 <body>
+<style>
+    .compare a {
+        background-color: darkgray;
+        color: white;
+        padding: 0.5em 1em;
+        position: relative;
+        text-decoration: none;
+    }
+    .upload {
+        padding: 0.5em 1em;
+        position: relative;
+        text-decoration: none;
+    }
+</style>
 <h4>Upload Multiple Files:</h4>
 <form method="POST" enctype="multipart/form-data" th:action="@{/upload-multiple-files}">
-    <input type="file" name="files" multiple> <br/><br/>
+    <input type="file" name="files" multiple class="files"> <br/><br/>
     <button type="submit" class="upload">Submit</button>
 </form>
 <br>
