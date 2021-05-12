@@ -13,4 +13,6 @@ This program compares the original file with the modified one. In order for the 
 
 ## Important: 
 
-For the program to work correctly, create a folder named "uploadFiles" in the documents
+1. For the program to work correctly, create a folder named "uploadFiles" in the documents;
+2. The original file must have 1 in its name. For example: *File1.txt*;
+3. The modified file must have 2 in its name. For example: *File2.txt*;
