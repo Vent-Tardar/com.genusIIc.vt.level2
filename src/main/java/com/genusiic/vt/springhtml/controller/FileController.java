@@ -96,13 +96,15 @@ public class FileController {
         try{
             StringBuilder org = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
             StringBuilder mdf = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
-            File folder = new File("C:/Users/Genus/Documents/uploadFiles");
+            File folder = new File("C:/Users/Genus/Documents/uploadFiles/");
             String[] files = folder.list();
             assert files != null;
             if (files.length < 2){
                 list_1.add("Not enough files to compare");
             } else if (files.length > 2){
                 list_1.add("More than two files uploaded");
+                for (File file : Objects.requireNonNull(new File(String.valueOf(folder)).listFiles()))
+                    if (file.isFile()) file.delete();
             } else {
                 for (File file : Objects.requireNonNull(folder.listFiles())) {
                     if (file.getName().contains("1")) {
@@ -142,6 +144,8 @@ public class FileController {
                     list.remove(delta);
                     list_1.add(str);
                 }
+                for (File file : Objects.requireNonNull(new File(String.valueOf(folder)).listFiles()))
+                    if (file.isFile()) file.delete();
             }
             logger.info("File comparison ended.");
         }catch (IOException e){

@@ -5,10 +5,19 @@
 </head>
 <body>
 <style>
-    .compare a {
+    .upload-box{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        padding: 40px;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+    }
+    .compare {
         background-color: darkgray;
         color: white;
-        padding: 0.5em 0.4em;
+        padding: 9px 45px;
         position: relative;
         text-decoration: none;
     }
@@ -16,15 +25,23 @@
         position: relative;
         text-decoration: none;
     }
+    input[type=submit] {
+        background-color: darkgray;
+        border: none;
+        color: white;
+        padding: 9px 70px;
+        text-decoration: none;
+        position: relative;
+    }
 </style>
-<h4>Upload Multiple Files:</h4>
-<form method="POST" enctype="multipart/form-data" th:action="@{/upload-multiple-files}">
-    <input type="file" name="files" multiple class="files"> <br/><br/>
-    <button type="submit" class="upload">Submit</button>
-</form>
-<br>
-<p class="compare">
-    <a href="http://localhost:8080/compare">Compare Files</a>
-</p>
+<div class="upload-box">
+    <h3>Upload Multiple Files:</h3>
+    <form method="POST" enctype="multipart/form-data" th:action="@{/upload-multiple-files}" class="uploadFiles">
+        <input type="file" name="files" multiple class="files"> <br/><br/>
+        <input type="submit" class="upload">
+        <br><br>
+        <a href="http://localhost:8080/compare" class="compare">Compare Files</a>
+    </form>
+</div>
 </body>
 </html>
