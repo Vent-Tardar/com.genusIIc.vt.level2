@@ -94,9 +94,9 @@ public class FileController {
         List<AbstractDelta<String>> list = new ArrayList<>();
         list_1.clear();
         try{
-            StringBuilder org = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
-            StringBuilder mdf = new StringBuilder("C:\\Users\\Genus\\Documents\\uploadFiles\\");
-            File folder = new File("C:/Users/Genus/Documents/uploadFiles/");
+            StringBuilder org = new StringBuilder("C:\\uploadFiles\\");
+            StringBuilder mdf = new StringBuilder("C:\\uploadFiles\\");
+            File folder = new File("C://uploadFiles/");
             String[] files = folder.list();
             assert files != null;
             if (files.length < 2){
