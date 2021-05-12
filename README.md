@@ -14,5 +14,6 @@ This program compares the original file with the modified one. In order for the 
 ## Important: 
 
 1. For the program to work correctly, create a folder named "uploadFiles" in the documents;
-2. The original file must have 1 in its name. For example: *File1.txt*;
-3. The modified file must have 2 in its name. For example: *File2.txt*;
+2. The original file must have `1` or `Original` in its name. For example: *File1.txt, OriginalFile.txt, originalFile.txt*;
+3. The modified file must have `2` or `Modified` in its name. For example: *File2.txt, ModifiedFile.txt, modifiedFile.txt*;
+4. Files are deleted from the temporary folder after comparison.
