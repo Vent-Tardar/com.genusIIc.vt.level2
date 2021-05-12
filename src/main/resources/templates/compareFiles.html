@@ -19,7 +19,7 @@
 </style>
 <div class="compare-box">
     <h3>Compare Files</h3>
-    <form method="GET" th:action="@{/compare}" name="compareFiles">
+    <form method="GET" th:action="@{/compare}">
         <ul th:name="elements">
             <li th:each="element : ${compare}">
                 <span th:utext="${element}"></span>
