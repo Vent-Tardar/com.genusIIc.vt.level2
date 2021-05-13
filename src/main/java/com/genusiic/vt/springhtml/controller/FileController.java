@@ -7,9 +7,6 @@ import com.github.difflib.patch.AbstractDelta;
 import com.github.difflib.patch.Patch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +35,6 @@ public class FileController {
 
     @GetMapping("/")
     public String listAllFiles(Model model) {
-
         model.addAttribute("files", storageService.loadAll().map(
                 path -> ServletUriComponentsBuilder.fromCurrentContextPath()
                         .path("/download/")
@@ -49,21 +45,8 @@ public class FileController {
         return "listFiles";
     }
 
-    @GetMapping("/download/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
-
-        Resource resource = storageService.loadAsResource(filename);
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
-    }
-
-    @PostMapping("/upload-file")
-    @ResponseBody
-    public FileResponse uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    public FileResponse uploadFile(@RequestParam("file") MultipartFile file){
         String name = storageService.store(file);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -74,34 +57,21 @@ public class FileController {
         return new FileResponse(name, uri, file.getContentType(), file.getSize());
     }
 
-    @PostMapping("/upload-multiple-files")
+    @PostMapping("/compare")
     @ResponseBody
-    public List<FileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
-        return Arrays.stream(files)
-                .map(file -> {
-                    try {
-                        return uploadFile(file);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return null;
-                })
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("/compare")
-    public String compare(Model model) {
+    public List<String> compare(@RequestParam("files") MultipartFile[] files) {
+        Arrays.stream(files).map(this::uploadFile).collect(Collectors.toList());
         List<AbstractDelta<String>> list = new ArrayList<>();
         list_1.clear();
         try{
             StringBuilder org = new StringBuilder("C:\\uploadFiles\\");
             StringBuilder mdf = new StringBuilder("C:\\uploadFiles\\");
-            File folder = new File("C://uploadFiles/");
-            String[] files = folder.list();
-            assert files != null;
-            if (files.length < 2){
+            File folder = new File("C://uploadFiles//");
+            String[] f = folder.list();
+            assert f != null;
+            if (f.length < 2){
                 list_1.add("Not enough files to compare");
-            } else if (files.length > 2){
+            } else if (f.length > 2){
                 list_1.add("More than two files uploaded");
                 for (File file : Objects.requireNonNull(new File(String.valueOf(folder)).listFiles()))
                     if (file.isFile()) file.delete();
@@ -110,7 +80,7 @@ public class FileController {
                     if ((file.getName().contains("1")) ||
                             (file.getName().contains("Original")) ||
                             (file.getName().contains("original"))) {
-                        org.append(file.getName());
+                        org.append(file.toPath().getFileName());
                     }
                     if ((file.getName().contains("2")) ||
                     (file.getName().contains("Modified")) ||
@@ -155,7 +125,6 @@ public class FileController {
         }catch (IOException e){
             System.out.println("Error: " + e.getCause());
         }
-        model.addAttribute("compare", list_1);
-        return "compareFiles";
+        return list_1;
     }
 }

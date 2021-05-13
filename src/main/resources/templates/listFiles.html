@@ -36,11 +36,9 @@
 </style>
 <div class="upload-box">
     <h3>Upload Multiple Files:</h3>
-    <form method="POST" enctype="multipart/form-data" th:action="@{/upload-multiple-files}">
+    <form method="Post" enctype="multipart/form-data" th:action="@{/compare}">
         <input type="file" name="files" multiple class="files"> <br/><br/>
-        <input type="submit" class="upload">
-        <br><br>
-        <a href="http://localhost:8080/compare" class="compare">Compare Files</a>
+        <input type="submit" class="upload" value="Compare Files">
     </form>
 </div>
 </body>
