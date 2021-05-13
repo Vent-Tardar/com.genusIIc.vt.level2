@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +42,6 @@ public class FileController {
                         .path(path.getFileName().toString())
                         .toUriString())
                 .collect(Collectors.toList()));
-
         return "listFiles";
     }
 
