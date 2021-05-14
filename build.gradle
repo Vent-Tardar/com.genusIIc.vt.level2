@@ -15,6 +15,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'junit:junit:4.13.1'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation group: 'io.github.java-diff-utils', name: 'java-diff-utils', version: '4.9'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
