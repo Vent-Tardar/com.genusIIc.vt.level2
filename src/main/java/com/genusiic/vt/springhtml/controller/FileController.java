@@ -76,14 +76,10 @@ public class FileController {
                     if (file.isFile()) file.delete();
             } else {
                 for (File file : Objects.requireNonNull(folder.listFiles())) {
-                    if ((file.getName().contains("1")) ||
-                            (file.getName().contains("Original")) ||
-                            (file.getName().contains("original"))) {
+                    if (file.getName().contains("1")) {
                         org.append(file.toPath().getFileName());
                     }
-                    if ((file.getName().contains("2")) ||
-                    (file.getName().contains("Modified")) ||
-                            (file.getName().contains("modified"))) {
+                    if (file.getName().contains("2")) {
                         mdf.append(file.getName());
                     }
                 }
